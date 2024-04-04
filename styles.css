@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s;
+    background-color: #DBAFA0;
+}
+
+header {
+    background-image: linear-gradient(to right,#704264,#49243E,#704264);
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    margin: 0;
+}
+
+#notes-container {
+    margin: 20px auto;
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.404);
+}
+
+#note-input {
+    width: calc(100% - 20px);
+    height: 100px;
+    resize: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #49243E ;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+#note-input:focus {
+    outline: none;
+    border-color: #49243E;
+}
+
+#notes {
+    display: grid;
+    grid-gap: 20px;
+}
+
+.note {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.3s;
+    background-image: linear-gradient(to right ,#DBAFA0,wheat);  
+}
+
+.note:hover {
+    transform: translateY(-5px);
+}
+
+.note p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.note small {
+    color: white;
+}
+
+.btn1{
+    background-color:#49243E;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+   cursor: pointer;
+   margin-bottom: 20px;
+}
+
+.btn1:hover{
+    background-color:#BB8493;
+}
+
+.note .buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.note .buttons button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.note .buttons button:hover {
+    color: black;
+    background-color: #DBAFA0;
+}
+
+.delete-btn {
+    background-color: #ea4335;
+    color: #fff;
+}
+
+.edit-btn {
+    background-color: #34a853;
+    color: #fff;
+}
+
+.edit-form {
+    display: none;
+    margin-top: 10px;
+}
+
+.edit-form textarea {
+    width: calc(100% - 40px);
+    height: 60px;
+    resize: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #704264;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.edit-form textarea:focus {
+    outline: none;
+    border-color: #704264;
+}
+
+.edit-form button {
+    background-color: #704264;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-form button.cancel-btn {
+    background-color: #BB8493;
+    margin-left: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 8px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color:#49243E;
+    color: #fff;
+    box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+}

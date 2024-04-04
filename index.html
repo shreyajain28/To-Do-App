@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SJ's Notes App</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/x-icon" href="logo.png">
+
+
+
+</head>
+<body>
+<header>
+    <h1>SJ's Notes App</h1>
+</header>
+
+<div id="notes-container">
+    <textarea id="note-input" placeholder="Write your note..."></textarea>
+    <button class="btn1" onclick="addNote()">Add Note</button>
+    <div id="notes"></div>
+</div>
+
+<footer>
+    <p>&copy; SJ's Notes App</p>
+</footer>
+
+<script>
+    const noteInput = document.getElementById("note-input");
+    const notesContainer = document.getElementById("notes");
+
+    // Load notes from localStorage
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+    displayNotes();
+
+    // Add note function
+    function addNote() {
+        const noteText = noteInput.value.trim();
+        if (noteText !== "") {
+            const timestamp = new Date().toLocaleString();
+            notes.push({ text: noteText, timestamp: timestamp });
+            localStorage.setItem("notes", JSON.stringify(notes));
+            displayNotes();
+            noteInput.value = "";
+        } else {
+            alert("Please enter a note!");
+        }
+    }
+
+    // Display notes function
+    function displayNotes() {
+        notesContainer.innerHTML = "";
+        notes.forEach((note, index) => {
+            const noteDiv = document.createElement("div");
+            noteDiv.className = "note";
+            noteDiv.innerHTML = `
+                <p>${note.text}</p>
+                <small>${note.timestamp}</small>
+                <div class="buttons">
+                    <button class="edit-btn" onclick="showEditForm(${index})">Edit</button>
+                    <button class="delete-btn" onclick="deleteNote(${index})">Delete</button>
+                </div>
+                <form class="edit-form" id="edit-form-${index}" onsubmit="editNote(${index}); return false;">
+                    <textarea>${note.text}</textarea>
+                    <button type="submit">Save</button>
+                    <button type="button" class="cancel-btn" onclick="hideEditForm(${index})">Cancel</button>
+                </form>
+            `;
+            notesContainer.appendChild(noteDiv);
+        });
+    }
+
+    // Delete note function
+    function deleteNote(index) {
+        notes.splice(index, 1);
+        localStorage.setItem("notes", JSON.stringify(notes));
+        displayNotes();
+    }
+
+    // Show edit form function
+    function showEditForm(index) {
+        const editForm = document.getElementById(`edit-form-${index}`);
+        const noteDiv = editForm.parentElement;
+        noteDiv.querySelector("p").style.display = "none";
+        noteDiv.querySelector("small").style.display = "none";
+        noteDiv.querySelector(".buttons").style.display = "none";
+        editForm.style.display = "block";
+        editForm.querySelector("textarea").focus();
+    }
+
+    // Hide edit form function
+    function hideEditForm(index) {
+        const editForm = document.getElementById(`edit-form-${index}`);
+        const noteDiv = editForm.parentElement;
+        noteDiv.querySelector("p").style.display = "block";
+        noteDiv.querySelector("small").style.display = "block";
+        noteDiv.querySelector(".buttons").style.display = "flex";
+        editForm.style.display = "none";
+    }
+
+    // Edit note function
+    function editNote(index) {
+        const editForm = document.getElementById(`edit-form-${index}`);
+        const editedText = editForm.querySelector("textarea").value.trim();
+        if (editedText !== "") {
+            notes[index].text = editedText;
+            localStorage.setItem("notes", JSON.stringify(notes));
+            displayNotes();
+        } else {
+            alert("Please enter a note!");
+        }
+    }
+</script>
+
+</body>
+</html>
